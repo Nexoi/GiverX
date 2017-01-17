@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Configuration;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * Created by neo on 08/01/2017.
  */
@@ -29,7 +28,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan(basePackages={"com.seeu.userOAuth","com.seeu.userbasic","com.seeu.user"})
 @ServletComponentScan
 @EnableConfigurationProperties(StorageProperties.class)
-//@ImportResource("classpath*:/config/applicationContext.xml")
 public class SEEUApplication {
     private Logger logger = Logger.getLogger(SEEUApplication.class);
 
