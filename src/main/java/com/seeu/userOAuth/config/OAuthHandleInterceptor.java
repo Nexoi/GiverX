@@ -6,6 +6,7 @@ import com.seeu.userOAuth.db.model.LoginUser;
 import com.seeu.userOAuth.service.UserFromToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -16,17 +17,18 @@ import java.io.IOException;
 /**
  * Created by neo on 17/01/2017.
  */
+@Component
 public class OAuthHandleInterceptor extends HandlerInterceptorAdapter {
 
-    @Autowired
-    UserFromToken userFromToken;
-    @Autowired
-    TurnBackUtil turnBackUtil;
+    UserFromToken userFromToken = new UserFromToken();
+
+    TurnBackUtil turnBackUtil = new TurnBackUtil();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handle) throws IOException {
-        String token = request.getAttribute("token").toString();
+        String token = (String) request.getAttribute("token");
         LoginUser user = userFromToken.parseToken(token);
+//        LoginUser user = null;
         if (user == null) {
             String result = turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
             response.getOutputStream().write(result.getBytes());
