@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<input id="urll" value="/user/login">
+<h2 id="h22"></h2>
+<h2 id="urll2"></h2>
+<h3 id="result">showmehere</h3>
+<input id="inin" value="1">
+<script type="text/javascript">
+    function dodo() {
+        var count = 0;
+        var h2 = document.getElementById("h22");
+        var inin = document.getElementById("inin");
+        var urlshow = document.getElementById("urll2");
+        var result = document.getElementById("result");
+        var max = inin.value;
+        var urll = document.getElementById("urll");
+
+        urlshow.innerHTML = urll.value;
+
+        var datatemp = "tmp";
+        var old = new Date().getTime();
+        for (var i = 0; i < max; i++) {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: urll.value,
+                data: {
+                    account: "neo",
+                    password: "haha123",
+                    token: "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE0ODQzOTAyODcsInN1YiI6IntcInVpZFwiOjIsXCJhY2NvdW50XCI6XCJuZW9cIn0iLCJleHAiOjE0ODQ5OTUwODd9.jKSre1nZXu_5M0OoQVdiNcwujSSjRJD_FghNlhyhlo8"
+                }, // 你的formid
+                error: function (request) {
+                    datatemp = request;
+                },
+                success: function (datas) {
+                    count = count + 1;
+                    alert("nn"+parseJSON(datas));
+                    datatemp = "nn"+parseJSON(datas);
+                }
+            });
+        }
+        h2.innerHTML = "count : " + count + "    time cost:" + (new Date().getTime() - old);
+        result.innerHTML = datatemp;
+    }
+</script>
+
+<div onclick="dodo()" style="height: 100px;width: 100px;background-color: bisque">clickme!!</div>
+</body>
+</html>
