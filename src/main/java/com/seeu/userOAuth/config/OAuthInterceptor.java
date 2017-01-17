@@ -14,10 +14,9 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 @EnableWebMvc
 public class OAuthInterceptor extends WebMvcConfigurerAdapter {
 
-
     @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor() {
-        return new LocaleChangeInterceptor();
+    public OAuthHandleInterceptor OAuthHandleInterceptor() {
+        return new OAuthHandleInterceptor();
     }
 
     /**
@@ -25,7 +24,7 @@ public class OAuthInterceptor extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new OAuthHandleInterceptor())
+        registry.addInterceptor(OAuthHandleInterceptor())
                 //添加需要验证登录用户操作权限的请求
                 .addPathPatterns("/**")
                 //排除不需要验证登录用户操作权限的请求

@@ -28,17 +28,12 @@ public class FileUploadController {
 
     @PostMapping("upload")
 //    public String upload(@ModelAttribute("model") UploadFile model) {
-    public String upload(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam("token") String token, @RequestParam("type") String type) {
+    public String upload(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam("type") String type, @RequestAttribute("UID") Integer UID) {
         if (file == null) {
             return turnBackUtil.formIt(TP.RESCODE_FAILURE, "上传失败，文件为空", null);
         }
-        LoginUser user = userFromToken.parseToken(token);
-        if (user == null) {
-            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "上传失败，无操作权限", null);
-        }
         // handle path
-        Integer uid = user.getUID();
-        String path = "" + uid;
+        String path = "" + UID;
 
         // handle type (.png)
         if (type == null)

@@ -8,10 +8,7 @@ import com.seeu.user.service.UserLoadInfoService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by neo on 14/01/2017.
@@ -31,62 +28,62 @@ public class UserLoadInfoController {
 
 
     @RequestMapping(value = "mybasicinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String loadBasicInfo(@RequestParam("token") String token) {
-        LoginUser user = userFromToken.parseToken(token);
-        if (user == null) {
-            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
-        }
+    public String loadBasicInfo(@RequestAttribute("UID") Integer UID) {
+//        LoginUser user = userFromToken.parseToken(token);
+//        if (user == null) {
+//            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
+//        }
         // do next :
-        return userInfoService.getmyBasic(user.getUID());
+        return userInfoService.getmyBasic(UID);
     }
 
     @RequestMapping(value = "mybusinessinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String loadBusinessInfo(@RequestParam("token") String token) {
-        LoginUser user = userFromToken.parseToken(token);
-        if (user == null) {
-            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
-        }
+    public String loadBusinessInfo(@RequestAttribute("UID") Integer UID) {
+//        LoginUser user = userFromToken.parseToken(token);
+//        if (user == null) {
+//            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
+//        }
         // do next :
-        return userInfoService.getmyBusiness(user.getUID());
+        return userInfoService.getmyBusiness(UID);
     }
 
     @RequestMapping(value = "myeducationinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String loadEducationInfo(@RequestParam("token") String token) {
-        LoginUser user = userFromToken.parseToken(token);
-        if (user == null) {
-            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
-        }
+    public String loadEducationInfo(@RequestAttribute("UID") Integer UID) {
+//        LoginUser user = userFromToken.parseToken(token);
+//        if (user == null) {
+//            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
+//        }
         // do next :
-        return userInfoService.getmyEducation(user.getUID());
+        return userInfoService.getmyEducation(UID);
     }
 
     @RequestMapping(value = "myinterestinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String loadInterestInfo(@RequestParam("token") String token) {
-        LoginUser user = userFromToken.parseToken(token);
-        if (user == null) {
-            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
-        }
+    public String loadInterestInfo(@RequestAttribute("UID") Integer UID) {
+//        LoginUser user = userFromToken.parseToken(token);
+//        if (user == null) {
+//            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
+//        }
         // do next :
-        return userInfoService.getmyInterest(user.getUID());
+        return userInfoService.getmyInterest(UID);
     }
 
     @RequestMapping(value = "myprofileinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String loadRealInfo(@RequestParam("token") String token) {
-        LoginUser user = userFromToken.parseToken(token);
-        if (user == null) {
-            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
-        }
+    public String loadRealInfo(@RequestAttribute("UID") Integer UID) {
+//        LoginUser user = userFromToken.parseToken(token);
+//        if (user == null) {
+//            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
+//        }
         // do next :
-        return userInfoService.getmyRealProfile(user.getUID());
+        return userInfoService.getmyRealProfile(UID);
     }
 
     @RequestMapping(value = "mysocialinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public String loadSocialNetInfo(@RequestParam("token") String token) {
-        LoginUser user = userFromToken.parseToken(token);
-        if (user == null) {
-            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
-        }
+    public String loadSocialNetInfo(@RequestAttribute("UID") Integer UID) {
+//        LoginUser user = userFromToken.parseToken(token);
+//        if (user == null) {
+//            return turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
+//        }
         // do next :
-        return userInfoService.getmySocialNet(user.getUID());
+        return userInfoService.getmySocialNet(UID);
     }
 }

@@ -20,15 +20,18 @@ import java.io.IOException;
 @Component
 public class OAuthHandleInterceptor extends HandlerInterceptorAdapter {
 
-    UserFromToken userFromToken = new UserFromToken();
+    @Autowired
+    UserFromToken userFromToken;
 
-    TurnBackUtil turnBackUtil = new TurnBackUtil();
+    @Autowired
+    TurnBackUtil turnBackUtil;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handle) throws IOException {
-        String token = (String) request.getAttribute("token");
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-Type", "text/json;charset=UTF-8");//这句话是解决乱码的
+        String token = (String) request.getParameter("token");
         LoginUser user = userFromToken.parseToken(token);
-//        LoginUser user = null;
         if (user == null) {
             String result = turnBackUtil.formIt(TP.RESCODE_NOAUTH, "无权访问", null);
             response.getOutputStream().write(result.getBytes());

@@ -25,7 +25,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableAutoConfiguration
 //@EnableTransactionManagement
 @SpringBootApplication
-@MapperScan(basePackages={"com.seeu.userOAuth","com.seeu.userbasic","com.seeu.user"})
+@MapperScan(basePackages={"com.seeu.userOAuth","com.seeu.user"})
 @ServletComponentScan
 @EnableConfigurationProperties(StorageProperties.class)
 public class SEEUApplication {
