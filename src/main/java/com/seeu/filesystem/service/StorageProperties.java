@@ -13,6 +13,26 @@ public class StorageProperties {
 
     private String location;
 
+    public String getUserhead() {
+        return userhead;
+    }
+
+    public void setUserhead(String userhead) {
+        this.userhead = userhead;
+    }
+
+    public String getUserproject() {
+        return userproject;
+    }
+
+    public void setUserproject(String userproject) {
+        this.userproject = userproject;
+    }
+
+    private String userhead;
+
+    private String userproject;
+
     public String getLocation() {
         return location;
     }

@@ -5,18 +5,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 /**
  * Created by neo on 17/01/2017.
  */
 @Configuration
 @EnableWebMvc
-public class OAuthInterceptor extends WebMvcConfigurerAdapter {
+public class InterceptorConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public OAuthHandleInterceptor OAuthHandleInterceptor() {
         return new OAuthHandleInterceptor();
+    }
+
+    @Bean
+    public FileDownloadInterceptor fileDownloadInterceptor() {
+        return new FileDownloadInterceptor();
     }
 
     /**
@@ -26,8 +30,11 @@ public class OAuthInterceptor extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(OAuthHandleInterceptor())
                 //添加需要验证登录用户操作权限的请求
-                .addPathPatterns("/**")
+                .addPathPatterns("/user/**","task/**")
                 //排除不需要验证登录用户操作权限的请求
-                .excludePathPatterns("/user/login");
+                .excludePathPatterns("/user/login", "fsysdn/**");
+        registry.addInterceptor(fileDownloadInterceptor())
+                .addPathPatterns("/fsysdn/**");
+//                .excludePathPatterns("");
     }
 }

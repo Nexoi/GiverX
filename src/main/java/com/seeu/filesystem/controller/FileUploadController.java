@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * Created by neo on 16/01/2017.
  */
@@ -33,7 +36,7 @@ public class FileUploadController {
             return turnBackUtil.formIt(TP.RESCODE_FAILURE, "上传失败，文件为空", null);
         }
         // handle path
-        String path = "" + UID;
+        Path path = Paths.get(UID.toString());// this path is illegal.
 
         // handle type (.png)
         if (type == null)

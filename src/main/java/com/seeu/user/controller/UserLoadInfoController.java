@@ -86,4 +86,8 @@ public class UserLoadInfoController {
         // do next :
         return userInfoService.getmySocialNet(UID);
     }
+    @RequestMapping(value = "myprojectinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public String loadProjectInfo(@RequestAttribute("UID") Integer UID) {
+        return userInfoService.getMyProject(UID);
+    }
 }

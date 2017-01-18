@@ -4,6 +4,7 @@ import com.TP;
 import com.TurnBackUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.seeu.filesystem.service.FileUploadService;
+import com.seeu.filesystem.service.StorageProperties;
 import com.seeu.user.dao.UserBasicMapper;
 import com.seeu.user.model.UserBasic;
 import org.apache.log4j.LogManager;
@@ -11,6 +12,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by neo on 14/01/2017.
@@ -28,15 +32,22 @@ public class UpdateUserBasicService {
     @Autowired
     TurnBackUtil turnBackUtil;
 
+    private final Path userheadPath;
+
+    public UpdateUserBasicService(StorageProperties properties) {
+        this.userheadPath = Paths.get(properties.getUserhead());
+    }
 
     public String updateMyIcon(MultipartFile icon, Integer UID) {
         String iconResult = null;
         if (icon != null) {
             // 更新头像
-            String mypath = TP.PATH_USERHEAD + "/" + UID;
+            Path mypath = userheadPath.resolve(UID.toString());
             String mytype = ".png";
             iconResult = fileUploadService.upload(icon, mytype, mypath);
         }
+        if (iconResult == null)
+            return turnBackUtil.formIt(TP.RESCODE_FAILURE, "更新失败", null);
         try {
             UserBasic basic = new UserBasic();
             basic.setUID(UID);

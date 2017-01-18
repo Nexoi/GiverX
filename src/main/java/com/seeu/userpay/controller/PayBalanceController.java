@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by neo on 18/01/2017.
  *
- * Only provide for query balance, cannot change balance.
+ * Only provide for query balance controller, cannot change balance.
  */
 @RestController
 @RequestMapping("pay")

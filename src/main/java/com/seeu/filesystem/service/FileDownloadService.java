@@ -1,55 +1,65 @@
 package com.seeu.filesystem.service;
 
+import com.TP;
+import com.TurnBackUtil;
 import com.seeu.filesystem.service.storage.StorageFileNotFoundException;
-import org.apache.log4j.Logger;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Created by neo on 14/01/2017.
+ * Created by neo on 18/01/2017.
  */
 @Service
 public class FileDownloadService {
 
-    private Logger LOGGER = Logger.getLogger(FileDownloadService.class);
+    @Autowired
+    FileDownloadServiceHelper fileDownloadServiceHelper;
+    @Autowired
+    TurnBackUtil turnBackUtil;
 
-    private final Path rootLocation;
+    private final Path userheadPath;
+    private final Path userprojectPath;
 
     public FileDownloadService(StorageProperties properties) {
-        this.rootLocation = Paths.get(properties.getLocation());
+        this.userheadPath = Paths.get(properties.getUserhead());
+        this.userprojectPath = Paths.get(properties.getUserproject());
     }
 
-    /**
-     * @param filename like: file-abc or xxx/yy.png
-     * @return
-     * @throws StorageFileNotFoundException
-     */
-    public Resource loadAsResource(String filename) throws StorageFileNotFoundException {
-        try {
-            Path file = load(filename);
-            Resource resource = new UrlResource(file.toUri());
-            if (resource.exists()) {
-                if (file.toFile().isDirectory()) {
-                    throw new StorageFileNotFoundException("File is a directory : " + filename);
-                }
-                if (!resource.isReadable()) {
-                    throw new StorageFileNotFoundException("Could not read file : " + filename);
-                }
-                return resource;
-            } else {
-                throw new StorageFileNotFoundException("File not exist : " + filename);
+    public Object loadMyHeadIcon(Integer UID, String filename) {
+        return loadFile(userheadPath.resolve(UID.toString()), filename);
+    }
+
+    public Object loadMyProjectPic(Integer UID, String filename) {
+        return loadFile(userprojectPath.resolve(UID.toString()), filename);
+    }
+
+    private Object loadFile(Path path, String filename) {
+        if (checkName(filename)) {
+            try {
+                return fileDownloadServiceHelper.loadAsResource(path, filename);
+            } catch (StorageFileNotFoundException e) {
+//                LOGGER.warn("FileDn System Exception ::\t" + e.getMessage());
+                return turnBackUtil.formIt(TP.RESCODE_EXCEPTION, "找不到文件", null);
             }
-        } catch (MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not read file - MalformedURLException : " + filename);
+        } else {
+            return turnBackUtil.formIt(TP.RESCODE_EXCEPTION, "文件名不合法", null);
         }
     }
 
-    private Path load(String filename) {
-        return rootLocation.resolve(filename);
+    //    @RequestMapping(value = "check")
+    private boolean checkName(String filename) {
+//        LOGGER.warn(filename);
+        if (filename == null || filename.trim().equals("")) {
+            return false;
+        }
+        String pattern = "^(?!_)(?!.*?_$)[a-zA-Z0-9-._\u4e00-\u9fa5]+$";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(filename);
+        return m.matches();
     }
 }

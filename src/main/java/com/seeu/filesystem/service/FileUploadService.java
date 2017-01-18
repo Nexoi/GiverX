@@ -60,10 +60,11 @@ public class FileUploadService {
      * @param path       relation path, no need to add '/' prefix
      * @return if success return filename, else return null. No path added.
      */
-    public String upload(MultipartFile file, String filesuffix, String path) {
+    public String upload(MultipartFile file, String filesuffix, Path path) {
 
         // create filepath if necessary
-        String pathname = rootLocation + "/" + path + "/";
+//        String pathname = rootLocation + "/" + path + "/";
+        String pathname = path.toString();
         File f = new File(pathname);
         if (!f.exists()) {
             f.mkdirs();
@@ -72,7 +73,7 @@ public class FileUploadService {
         try {
             String uuid = UUID.randomUUID().toString();
             String name = uuid + filesuffix;
-            File fn = new File(pathname + name);
+            File fn = new File(pathname + "/" + name);
             FileUtils.writeByteArrayToFile(fn, file.getBytes());
             return name;
         } catch (IOException exception) {

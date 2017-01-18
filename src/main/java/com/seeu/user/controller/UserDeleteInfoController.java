@@ -17,12 +17,16 @@ public class UserDeleteInfoController {
     DeleteInfoService deleteInfoService;
 
     @RequestMapping("education")
-    public String addEducation(@RequestParam("recordID") Integer recordID, @RequestAttribute("UID") Integer UID) {
+    public String delEducation(@RequestParam("recordID") Integer recordID, @RequestAttribute("UID") Integer UID) {
         return deleteInfoService.delEducation(recordID, UID);
     }
 
     @RequestMapping("business")
-    public String addBusiness(@RequestParam("recordID") Integer recordID, @RequestAttribute("UID") Integer UID) {
+    public String delBusiness(@RequestParam("recordID") Integer recordID, @RequestAttribute("UID") Integer UID) {
+        return deleteInfoService.delBusiness(recordID, UID);
+    }
+    @RequestMapping("project")
+    public String delProject(@RequestParam("recordID") Integer recordID, @RequestAttribute("UID") Integer UID) {
         return deleteInfoService.delBusiness(recordID, UID);
     }
 }

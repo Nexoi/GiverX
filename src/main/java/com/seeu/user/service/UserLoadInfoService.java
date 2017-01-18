@@ -40,6 +40,9 @@ public class UserLoadInfoService {
     @Autowired
     UserSocialNetMapper userSocialNetMapper;
 
+    @Autowired
+    UserProjectMapper userProjectMapper;
+
     public String getmyBasic(Integer UID) {
         UserBasic user = userBasicMapper.selectByPrimaryKey(UID);
         if (user == null)
@@ -99,5 +102,29 @@ public class UserLoadInfoService {
         Object json = JSONObject.toJSON(user);
 //        logger.info("Request UserBascInfo UID : " + UID);
         return turnBackUtil.formIt(TP.RESCODE_SUCCESS, "获取个人社交帐号信息成功", json);
+    }
+
+    public String getMyProject(Integer UID) {
+        List<UserProjectWithBLOBs> list = userProjectMapper.selectByUID(UID);
+        if (list != null && list.size() != 0) {
+            JSONArray ja = new JSONArray();
+            for (UserProjectWithBLOBs userProject : list) {
+                JSONObject jo = new JSONObject();
+                jo.put("recordID", userProject.getRecordID());
+                jo.put("UID", userProject.getUID());
+                jo.put("type", userProject.getType());
+                jo.put("title", userProject.getTitle());
+                jo.put("url", userProject.getUrl());
+                jo.put("role", userProject.getRole());
+                jo.put("time_start", userProject.getTime_start());
+                jo.put("time_end", userProject.getTime_end());
+                jo.put("note", userProject.getNote());
+                jo.put("performance", userProject.getPerformance());
+                jo.put("pictures", JSONArray.parse(userProject.getPictures()));
+                ja.add(jo);
+            }
+            return turnBackUtil.formIt(TP.RESCODE_SUCCESS, "获取个人项目信息成功", ja);
+        } else
+            return turnBackUtil.formIt(TP.RESCODE_FAILURE, "无项目经验信息", null);
     }
 }

@@ -18,5 +18,6 @@ public class TP {
 
 
     public static final String PATH_USERHEAD = "user//headicon";    //头像存储地址
+    public static final String PATH_USER_PROJECT = "user//project";    //头像存储地址
 
 }
