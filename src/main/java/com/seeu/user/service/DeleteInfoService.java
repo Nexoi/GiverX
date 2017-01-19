@@ -31,7 +31,6 @@ public class DeleteInfoService {
     TurnBackUtil turnBackUtil;
 
     /**
-     *
      * @param recordID
      * @param UID
      * @return
@@ -65,7 +64,7 @@ public class DeleteInfoService {
         for (UserProjectWithBLOBs project : list) {
             int rec = project.getRecordID();
             if (rec == recordID) {
-                userEducationMapper.deleteByPrimaryKey(recordID);
+                userProjectMapper.deleteByPrimaryKey(recordID);
                 return turnBackUtil.formIt(TP.RESCODE_SUCCESS, "删除成功", null);
             }
         }

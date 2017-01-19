@@ -45,6 +45,11 @@ public class UserUpdateInfoController {
         return updateUserInfoService.updateMyEducation(userInfo, UID);
     }
 
+    @RequestMapping("project")
+    public String updateEducation(@RequestAttribute("UID") Integer UID, @ModelAttribute UserProjectWithBLOBs userInfo) {
+        return updateUserInfoService.updateMyProject(userInfo, UID);
+    }
+
     @RequestMapping("interest")
     public String updateBasic(@RequestAttribute("UID") Integer UID, @ModelAttribute UserInterest userInfo) {
 //        LoginUser louser = userFromToken.parseToken(token);

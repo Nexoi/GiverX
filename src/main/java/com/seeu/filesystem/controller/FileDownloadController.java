@@ -20,9 +20,6 @@ import java.util.regex.Pattern;
 @RequestMapping("fsysdn")
 public class FileDownloadController {
     private Logger LOGGER = Logger.getLogger(FileDownloadController.class);
-
-    @Autowired
-    TurnBackUtil turnBackUtil;
     @Autowired
     FileDownloadService fileDownloadService;
 
@@ -35,12 +32,12 @@ public class FileDownloadController {
 
     @GetMapping("user/head/{filename:.+}")
     public Object serveFile2(@PathVariable("filename") String filename, @RequestAttribute("UID") Integer UID) {
-        return fileDownloadService.loadMyHeadIcon(UID, filename);//  hints: 利用混淆路径增强安全
+        return fileDownloadService.loadHeadIcon(UID, filename);//  hints: 利用混淆路径增强安全
     }
 
     @GetMapping("user/projectpic/{filename:.+}")
     public Object serveFile3(@PathVariable("filename") String filename, @RequestAttribute("UID") Integer UID) {
-        return fileDownloadService.loadMyProjectPic(UID, filename);
+        return fileDownloadService.loadProjectPic(UID, filename);
     }
 
 

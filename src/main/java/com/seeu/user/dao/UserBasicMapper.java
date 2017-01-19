@@ -81,6 +81,20 @@ public interface UserBasicMapper {
     })
     UserBasic selectByPrimaryKey(Integer UID);
 
+    @Select({
+            "select",
+            "UID, icon, name, gender, sign ",
+            "from user_basic",
+            "where UID = #{UID,jdbcType=INTEGER}"
+    })
+    @Results({
+            @Result(column = "UID", property = "UID", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "icon", property = "icon", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "gender", property = "gender", jdbcType = JdbcType.TINYINT),
+            @Result(column = "sign", property = "sign", jdbcType = JdbcType.VARCHAR)
+    })
+    UserBasic selectPureByPrimaryKey(Integer UID);
 
     @Select({
             "select",

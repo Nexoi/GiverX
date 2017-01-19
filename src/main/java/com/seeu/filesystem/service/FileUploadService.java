@@ -27,12 +27,12 @@ public class FileUploadService {
 
     private static final Logger logger = LogManager.getLogger(FileUploadService.class);
 
-    private final Path rootLocation;
+//    private final Path rootLocation;
 
     @Bean(name = "multipartResolver")
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(10000000);// 10MB
+        multipartResolver.setMaxUploadSize(41024000);// 10MB
         logger.info(">> multipartResolver was used. ( FileUploadService.class )");
         return multipartResolver;
     }
@@ -44,10 +44,10 @@ public class FileUploadService {
         return new MultipartFilter();
     }
 
-    @Autowired
-    public FileUploadService(StorageProperties properties) {
-        this.rootLocation = Paths.get(properties.getLocation());
-    }
+//    @Autowired
+//    public FileUploadService(StorageProperties properties) {
+//        this.rootLocation = Paths.get(properties.getLocation());
+//    }
 
 
     @Autowired

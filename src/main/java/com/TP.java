@@ -17,6 +17,25 @@ public class TP {
     public static final int RESCODE_SUCCESS_LOGIN = 1007;          //登录成功
 
 
+    public static final int RESCODE_TASKBIDDER_NOBIDDER = 3001;       //该任务无竞标人
+    public static final int RESCODE_TASKBIDDER_TOKEN = 3002;          //该任务竞标人已经被选取为领取人
+
+
+    public static final int RESCODE_TASKQUERY_SUCCESS_NOCLEAN = 4000;        //查询成功，不清除原有缓存数据，并连接上该返回数据
+    public static final int RESCODE_TASKQUERY_SUCCESS_CLEAN = 4001;          //查询成功，并清除原有缓存数据做更新
+    public static final int RESCODE_TASKQUERY_NONEEDMORE = 4002;             //已经没有更新的数据可以查询了
+    /**
+     * 数据库存储键值对应表
+     */
+//    public static final int TASK_STATUS_UNTOKEN = 0;        //该任务未被领取
+    public static final int TASK_STATUS_BIDDING = 1;          //该任务正在竞标
+    public static final int TASK_STATUS_TOKEN = 2;            //该任务已被领取
+    public static final int TASK_STATUS_CLOSED = 3;           //该任务已完成
+
+    public static final int TASKBIDDER_STATUS_BIDDING = 1;         //该任务已竞标
+    public static final int TASKBIDDER_STATUS_TOKEN = 1;           //该任务已获取
+    public static final int TASKBIDDER_STATUS_FINISHED = 1;        //该任务已完成
+
     public static final String PATH_USERHEAD = "user//headicon";    //头像存储地址
     public static final String PATH_USER_PROJECT = "user//project";    //头像存储地址
 

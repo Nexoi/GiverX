@@ -24,18 +24,24 @@ public class FileDownloadService {
 
     private final Path userheadPath;
     private final Path userprojectPath;
+    private final Path taskPath;
 
     public FileDownloadService(StorageProperties properties) {
         this.userheadPath = Paths.get(properties.getUserhead());
         this.userprojectPath = Paths.get(properties.getUserproject());
+        this.taskPath = Paths.get(properties.getTask());
     }
 
-    public Object loadMyHeadIcon(Integer UID, String filename) {
+    public Object loadHeadIcon(Integer UID, String filename) {
         return loadFile(userheadPath.resolve(UID.toString()), filename);
     }
 
-    public Object loadMyProjectPic(Integer UID, String filename) {
+    public Object loadProjectPic(Integer UID, String filename) {
         return loadFile(userprojectPath.resolve(UID.toString()), filename);
+    }
+
+    public Object loadTaskPic(Integer UID, String filename) {
+        return loadFile(taskPath.resolve(UID.toString()), filename);
     }
 
     private Object loadFile(Path path, String filename) {

@@ -1,8 +1,10 @@
 package com.seeu.filesystem.service;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(locations="classpath:application.properties",prefix="seeu.storage")
+//@Component
+@ConfigurationProperties(locations = "classpath:application.properties", prefix = "seeu.storage")
 //@ConfigurationProperties("storage")
 public class StorageProperties {
 
@@ -12,6 +14,20 @@ public class StorageProperties {
 //    private String location = "templates/upload-dir";
 
     private String location;
+
+    private String userhead;
+
+    private String userproject;
+
+    public String getTask() {
+        return task;
+    }
+
+    public void setTask(String task) {
+        this.task = task;
+    }
+
+    private String task;
 
     public String getUserhead() {
         return userhead;
@@ -28,10 +44,6 @@ public class StorageProperties {
     public void setUserproject(String userproject) {
         this.userproject = userproject;
     }
-
-    private String userhead;
-
-    private String userproject;
 
     public String getLocation() {
         return location;

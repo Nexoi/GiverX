@@ -11,12 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+
 /**
  * Created by neo on 08/01/2017.
  */
@@ -25,8 +24,15 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableAutoConfiguration
 //@EnableTransactionManagement
 @SpringBootApplication
-@MapperScan(basePackages={"com.seeu.userOAuth","com.seeu.user","com.seeu.userpay"})
+@MapperScan(basePackages = {
+        "com.seeu.userOAuth",
+        "com.seeu.user",
+        "com.seeu.userpay",
+        "com.seeu.task",
+        "com.seeu.im"
+        })
 @ServletComponentScan
+@PropertySources(value = {@PropertySource("classpath:application.properties")})
 @EnableConfigurationProperties(StorageProperties.class)
 public class SEEUApplication {
     private Logger logger = Logger.getLogger(SEEUApplication.class);
@@ -38,7 +44,7 @@ public class SEEUApplication {
         return new DataSource();
     }
 
-//    提供SqlSeesion
+    //    提供SqlSeesion
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         logger.info(">> SqlSessionFactory.method was used. ( SEEUApplication.class )");
@@ -51,7 +57,8 @@ public class SEEUApplication {
 
         return sqlSessionFactoryBean.getObject();
     }
-//
+
+    //
     @Bean
     public PlatformTransactionManager transactionManager() {
         logger.info(">> PlatformTransactionManager.method was used. ( SEEUApplication.class )");

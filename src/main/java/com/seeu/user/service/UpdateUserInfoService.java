@@ -2,6 +2,7 @@ package com.seeu.user.service;
 
 import com.TP;
 import com.TurnBackUtil;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.seeu.user.dao.*;
 import com.seeu.user.model.*;
@@ -27,6 +28,8 @@ public class UpdateUserInfoService {
     UserRealProfileMapper userRealProfileMapper;
     @Autowired
     UserSocialNetMapper userSocialNetMapper;
+    @Autowired
+    UserProjectMapper userProjectMapper;
 
     @Autowired
     TurnBackUtil turnBackUtil;
@@ -36,7 +39,11 @@ public class UpdateUserInfoService {
      * @未来这些操作方式可以更新改进
      */
     public String updateMyBusiness(UserBusiness user, Integer UID) {
+        if (user.getRecordID() == null) {
+            return turnBackUtil.formIt(TP.RESCODE_EXCEPTION, "更新失败，请确认 recordID 是否正确", null);
+        }
         try {
+            // 必须要有 recordID
             user.setUID(UID);
             userBusinessMapper.updateByPrimaryKeySelective(user);
         } catch (Exception e) {
@@ -57,6 +64,9 @@ public class UpdateUserInfoService {
     }
 
     public String updateMyEducation(UserEducation user, Integer UID) {
+        if (user.getRecordID() == null) {
+            return turnBackUtil.formIt(TP.RESCODE_EXCEPTION, "更新失败，请确认 recordID 是否正确", null);
+        }
         try {
             user.setUID(UID);
             userEducationMapper.updateByPrimaryKeySelective(user);
@@ -74,6 +84,42 @@ public class UpdateUserInfoService {
         } catch (Exception e) {
             logger.error(e.getMessage());
             return turnBackUtil.formIt(TP.RESCODE_FAILURE, "更新失败", null);
+        }
+    }
+
+    public String updateMyProject(UserProjectWithBLOBs user, Integer UID) {
+        if (user.getRecordID() == null) {
+            return turnBackUtil.formIt(TP.RESCODE_EXCEPTION, "更新失败，请确认 recordID 是否正确", null);
+        }
+        try {
+            if (!isPicturesNameAvaliable(user.getPictures()))
+                return turnBackUtil.formIt(TP.RESCODE_FAILURE, "更新失败，请检查图片格式是否正确", null);
+            user.setUID(UID);
+            userProjectMapper.updateByPrimaryKeySelective(user);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return turnBackUtil.formIt(TP.RESCODE_EXCEPTION, "更新失败，请勿重复更新", null);
+        }
+        try {
+            UserProjectWithBLOBs userProject = userProjectMapper.selectByPrimaryKey(UID);
+            if (userProject != null) {
+                Object jo = JSONObject.toJSON(userProject);
+                return turnBackUtil.formIt(TP.RESCODE_SUCCESS, "更新成功", jo);// 返回更新后的信息
+            } else
+                return turnBackUtil.formIt(TP.RESCODE_EXCEPTION, "无此用户数据可更新", null);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return turnBackUtil.formIt(TP.RESCODE_FAILURE, "更新失败", null);
+        }
+    }
+
+    private boolean isPicturesNameAvaliable(String pictures) {
+        if (pictures == null) return true;
+        try {
+            Object jsonArray = JSONArray.parse(pictures);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
