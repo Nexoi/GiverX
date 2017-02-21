@@ -43,6 +43,22 @@ public class QueryTaskService {
     @Autowired
     TurnBackUtil turnBackUtil;
 
+
+    /**
+     * @param TID
+     * @return
+     */
+    public String queryByTID(Integer TID) {
+        if (TID == null)
+            return turnBackUtil.formIt(TP.RESCODE_FAILURE, "请输入 TID", null);
+        TaskBasicWithBLOBs task = taskBasicMapper.selectByPrimaryKey(TID);
+        if (task != null)
+            return turnBackUtil.formIt(TP.RESCODE_TASKQUERY_SUCCESS_NOCLEAN, "详情信息查询成功", reformTask(task));
+        else
+            return turnBackUtil.formIt(TP.RESCODE_TASKQUERY_NOSUCHTASK, "无此任务信息", null);
+    }
+
+
     /**
      * 加载更多：
      * 加载 TID 大于 currentTID 的记录
@@ -85,29 +101,33 @@ public class QueryTaskService {
     private JSONArray reformWithUserInfo(List<TaskBasicWithBLOBs> tasks) {
         JSONArray ja = new JSONArray();
         for (TaskBasicWithBLOBs task : tasks) {
-            Integer UID = task.getUID();
-            JSONObject jo = new JSONObject();
-            jo.put("TID", task.getTID());
-            jo.put("title", task.getTitle());
-            jo.put("tag", task.getTag());
-            jo.put("time", task.getTime());
-            jo.put("like_num", task.getLiker_num());
-            jo.put("read_num", task.getRead_num());
-            jo.put("comment_num", task.getComment_num());
-            jo.put("status", task.getStatus());
-            jo.put("money", task.getMoney());
-            jo.put("note", task.getNote());
-            jo.put("pictures", JSONArray.parse(task.getPictures()));
-            jo.put("UID", UID);
-            UserBasic user = userBasicMapper.selectPureByPrimaryKey(UID);
-            if (user != null) {
-                jo.put("user_name", user.getName());
-                jo.put("user_icon", user.getIcon());
-                jo.put("user_gender", user.getGender());
-                jo.put("user_sign", user.getSign());
-            }
-            ja.add(jo);
+            ja.add(reformTask(task));
         }
         return ja;
+    }
+
+    private JSONObject reformTask(TaskBasicWithBLOBs task) {
+        Integer UID = task.getUID();
+        JSONObject jo = new JSONObject();
+        jo.put("TID", task.getTID());
+        jo.put("title", task.getTitle());
+        jo.put("tag", task.getTag());
+        jo.put("time", task.getTime());
+        jo.put("like_num", task.getLiker_num());
+        jo.put("read_num", task.getRead_num());
+        jo.put("comment_num", task.getComment_num());
+        jo.put("status", task.getStatus());
+        jo.put("money", task.getMoney());
+        jo.put("note", task.getNote());
+        jo.put("pictures", JSONArray.parse(task.getPictures()));
+        jo.put("UID", UID);
+        UserBasic user = userBasicMapper.selectPureByPrimaryKey(UID);
+        if (user != null) {
+            jo.put("user_name", user.getName());
+            jo.put("user_icon", user.getIcon());
+            jo.put("user_gender", user.getGender());
+            jo.put("user_sign", user.getSign());
+        }
+        return jo;
     }
 }

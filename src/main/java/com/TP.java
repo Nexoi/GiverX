@@ -24,6 +24,7 @@ public class TP {
     public static final int RESCODE_TASKQUERY_SUCCESS_NOCLEAN = 4000;        //查询成功，不清除原有缓存数据，并连接上该返回数据
     public static final int RESCODE_TASKQUERY_SUCCESS_CLEAN = 4001;          //查询成功，并清除原有缓存数据做更新
     public static final int RESCODE_TASKQUERY_NONEEDMORE = 4002;             //已经没有更新的数据可以查询了
+    public static final int RESCODE_TASKQUERY_NOSUCHTASK = 4003;             //无此任务信息
     /**
      * 数据库存储键值对应表
      */

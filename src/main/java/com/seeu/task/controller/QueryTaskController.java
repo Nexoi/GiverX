@@ -17,17 +17,24 @@ public class QueryTaskController {
     @Autowired
     QueryTaskService queryTaskService;
 
+
     @RequestMapping("querynew")
-    public String querynew(@RequestAttribute("UID") Integer UID, @RequestParam(value = "currentTID", required = false) Integer TID) {
+    public String querynew(@RequestAttribute(value = "UID", required = false) Integer UID, @RequestParam(value = "currentTID", required = false) Integer TID) {
         if (TID == null)
             TID = 0;
-        return queryTaskService.queryNewFromWhichTID(UID,TID);
+        return queryTaskService.queryNewFromWhichTID(UID, TID);
     }
 
     @RequestMapping("queryold")
-    public String queryold(@RequestAttribute("UID") Integer UID, @RequestParam(value = "currentTID", required = false) Integer TID) {
+    public String queryold(@RequestAttribute(value = "UID", required = false) Integer UID, @RequestParam(value = "currentTID", required = false) Integer TID) {
         if (TID == null)
             TID = 0;
         return queryTaskService.queryMoreOldByUID(UID, TID);
+    }
+
+
+    @RequestMapping("querybyTID")
+    public String queryByTID(@RequestParam(value = "currentTID", required = false) Integer TID) {
+        return queryTaskService.queryByTID(TID);
     }
 }
