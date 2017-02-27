@@ -5,9 +5,9 @@
     <context id="MyBatisDemo">
         <jdbcConnection connectionURL="jdbc:mysql://seeumysql.mysql.rds.aliyuncs.com:3499/seeu_test"
                         driverClass="com.mysql.jdbc.Driver" password="SEEUps999" userId="seeu_root"/>
-        <javaModelGenerator targetPackage="com.seeu.task.model" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.seeu.order.model" targetProject="src/main/java"/>
         <!--<sqlMapGenerator targetPackage="com.seeu.logintokeneeudb.mapper" targetProject="src/main/java"/>-->
-        <javaClientGenerator targetPackage="com.seeu.task.dao" targetProject="src/main/java" type="ANNOTATEDMAPPER"/>
+        <javaClientGenerator targetPackage="com.seeu.order.dao" targetProject="src/main/java" type="ANNOTATEDMAPPER"/>
 
         <!--<table schema="seeu_test" tableName="user_basic" domainObjectName="UserBasic"-->
         <!--enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
@@ -72,7 +72,7 @@
         <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
 
-        <table schema="seeu_test" tableName="task_basic" domainObjectName="TaskBasic"
+        <table schema="giver_order" tableName="order" domainObjectName="OrderInfo"
         enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
         enableSelectByExample="false" selectByExampleQueryId="false">
         <property name="useActualColumnNames" value="true"/>

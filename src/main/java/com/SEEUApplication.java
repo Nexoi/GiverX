@@ -15,6 +15,7 @@ import org.springframework.context.annotation.*;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * Created by neo on 08/01/2017.

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * Created by neo on 17/01/2017.
  */
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc ??????????? mgj
 public class InterceptorConfig extends WebMvcConfigurerAdapter {
 
     @Bean
@@ -30,9 +30,10 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(OAuthHandleInterceptor())
                 //添加需要验证登录用户操作权限的请求
-                .addPathPatterns("/user/**","task/**")
+//                .excludePathPatterns("/user/login","user/register","user/register/*")
+                .addPathPatterns("/user/**","/task/**")
                 //排除不需要验证登录用户操作权限的请求
-                .excludePathPatterns("/user/login", "fsysdn/**");
+                .excludePathPatterns("/user/login","/user/register","/user/register/*");
         registry.addInterceptor(fileDownloadInterceptor())
                 .addPathPatterns("/fsysdn/**");
 //                .excludePathPatterns("");

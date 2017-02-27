@@ -37,7 +37,12 @@ public class TP {
     public static final int TASKBIDDER_STATUS_TOKEN = 1;           //该任务已获取
     public static final int TASKBIDDER_STATUS_FINISHED = 1;        //该任务已完成
 
-    public static final String PATH_USERHEAD = "user//headicon";    //头像存储地址
+    public static final int ORDER_NOSUCH = 5001;                     //无此订单信息
+    public static final int ORDER_FINISH_WITH_PURCHASE = 5002;       //订单关闭成功_支付成功
+    public static final int ORDER_FINISH_WITHOUT_PURCHASE = 5003;    //订单关闭成功_无支付环节
+    public static final int ORDER_UNFINISH = 5004;                   //订单关闭失败
+
+
     public static final String PATH_USER_PROJECT = "user//project";    //头像存储地址
 
 }
