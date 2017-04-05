@@ -18,7 +18,7 @@ public class TaskCommentController {
     @Autowired
     TurnBackUtil turnBackUtil;
 
-    @RequestMapping("comment")
+    @RequestMapping(value = "comment",method = RequestMethod.POST)
     public String commentIt(@RequestAttribute("UID") Integer UID, @ModelAttribute TaskComment comment) {
         if (comment == null)
             return turnBackUtil.formIt(TP.RESCODE_FAILURE, "评论失败", null);
@@ -27,7 +27,7 @@ public class TaskCommentController {
         return commentService.commentIt(comment);
     }
 
-    @RequestMapping("delcomment")
+    @RequestMapping(value = "delcomment",method = RequestMethod.POST)
     public String delComment(@RequestAttribute("UID") Integer UID, @RequestParam("commentID") Integer commentID) {
         return commentService.delComment(UID,commentID);
     }

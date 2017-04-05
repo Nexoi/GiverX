@@ -88,7 +88,8 @@ public class QueryTaskService {
     // 返回的数据每条都要加上发布者用户信息（UID、icon、name）, 用户点击头像即可进入个人名片
     public String queryNewFromWhichTID(Integer UID, Integer fromTID) {
         int limit = 13;
-        List<TaskBasicWithBLOBs> tasks = taskBasicMapper.selectByPrimaryKeyMoreNew(fromTID, limit);
+//        List<TaskBasicWithBLOBs> tasks = taskBasicMapper.selectByPrimaryKeyMoreNew(fromTID, limit);
+        List<TaskBasicWithBLOBs> tasks = taskBasicMapper.selectRefresh(limit);
         if (tasks == null || tasks.size() == 0)
             return turnBackUtil.formIt(TP.RESCODE_TASKQUERY_NONEEDMORE, "没有更多的任务了", null);
         if (tasks.size() >= limit) {
@@ -113,7 +114,7 @@ public class QueryTaskService {
         jo.put("title", task.getTitle());
         jo.put("tag", task.getTag());
         jo.put("time", task.getTime());
-        jo.put("like_num", task.getLiker_num());
+        jo.put("liker_num", task.getLiker_num());
         jo.put("read_num", task.getRead_num());
         jo.put("comment_num", task.getComment_num());
         jo.put("status", task.getStatus());

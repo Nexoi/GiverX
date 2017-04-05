@@ -23,6 +23,9 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
         return new FileDownloadInterceptor();
     }
 
+
+    @Bean
+    public NormalQueryInterceptor normalQueryInterceptor(){return new NormalQueryInterceptor();}
     /**
      * 添加拦截器
      */
@@ -31,11 +34,13 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(OAuthHandleInterceptor())
                 //添加需要验证登录用户操作权限的请求
 //                .excludePathPatterns("/user/login","user/register","user/register/*")
-                .addPathPatterns("/user/**","/task/**")
+                .addPathPatterns("/user/**","/task/**","/order/**")
                 //排除不需要验证登录用户操作权限的请求
-                .excludePathPatterns("/user/login","/user/register","/user/register/*");
+                .excludePathPatterns("/user/login","/user/register","/user/register/*","/user/load/*");
         registry.addInterceptor(fileDownloadInterceptor())
                 .addPathPatterns("/fsysdn/**");
 //                .excludePathPatterns("");
+        registry.addInterceptor(normalQueryInterceptor())
+                .addPathPatterns("/file/upload");
     }
 }

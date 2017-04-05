@@ -4,6 +4,7 @@ import com.seeu.userpay.service.PayBalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,8 +18,9 @@ public class PayBalanceController {
     @Autowired
     PayBalanceService payBalanceService;
 
-    @RequestMapping("querybalance")
+    @RequestMapping(value = "querybalance",method = RequestMethod.POST)
     public String query(@RequestAttribute("UID")Integer UID){
         return payBalanceService.queryBalance(UID);
     }
+
 }

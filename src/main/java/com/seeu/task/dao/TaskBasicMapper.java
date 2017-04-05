@@ -81,6 +81,33 @@ public interface TaskBasicMapper {
     })
     TaskBasicWithBLOBs selectByPrimaryKey(Integer TID);
 
+
+
+    @Select({
+            "select",
+            "TID, UID, title, time, tag, liker_num, read_num, comment_num, status, money, ",
+            "note, pictures",
+            "from task_basic",
+            "limit 0,#{limit,jdbcType=INTEGER}"
+    })
+    @Results({
+            @Result(column = "TID", property = "TID", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "UID", property = "UID", jdbcType = JdbcType.INTEGER),
+            @Result(column = "title", property = "title", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "time", property = "time", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "tag", property = "tag", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "liker_num", property = "liker_num", jdbcType = JdbcType.INTEGER),
+            @Result(column = "read_num", property = "read_num", jdbcType = JdbcType.INTEGER),
+            @Result(column = "comment_num", property = "comment_num", jdbcType = JdbcType.INTEGER),
+            @Result(column = "status", property = "status", jdbcType = JdbcType.INTEGER),
+            @Result(column = "money", property = "money", jdbcType = JdbcType.DECIMAL),
+            @Result(column = "note", property = "note", jdbcType = JdbcType.LONGVARCHAR),
+            @Result(column = "pictures", property = "pictures", jdbcType = JdbcType.LONGVARCHAR)
+    })
+    List<TaskBasicWithBLOBs> selectRefresh(@Param("limit") Integer limit);
+
+
+
     @Select({
             "select",
             "TID, UID, title, time, tag, liker_num, read_num, comment_num, status, money, ",
@@ -104,7 +131,7 @@ public interface TaskBasicMapper {
             @Result(column = "note", property = "note", jdbcType = JdbcType.LONGVARCHAR),
             @Result(column = "pictures", property = "pictures", jdbcType = JdbcType.LONGVARCHAR)
     })
-    List<TaskBasicWithBLOBs> selectByPrimaryKeyMoreNew(Integer TID, Integer limit);
+    List<TaskBasicWithBLOBs> selectByPrimaryKeyMoreNew(@Param("TID") Integer TID, @Param("limit") Integer limit);
 
     @Select({
             "select",
@@ -129,7 +156,7 @@ public interface TaskBasicMapper {
             @Result(column = "note", property = "note", jdbcType = JdbcType.LONGVARCHAR),
             @Result(column = "pictures", property = "pictures", jdbcType = JdbcType.LONGVARCHAR)
     })
-    List<TaskBasicWithBLOBs> selectByPrimaryKeyMoreOld(Integer TID, Integer limit);
+    List<TaskBasicWithBLOBs> selectByPrimaryKeyMoreOld(@Param("TID") Integer TID, @Param("limit") Integer limit);
 
     @Select({
             "select",

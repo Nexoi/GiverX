@@ -16,19 +16,19 @@ public class BidderController {
     BidderService bidderService;
 
     // 查询竞标人列表 (所有登录过的人都可以查看)
-    @RequestMapping("querybidders")
+    @RequestMapping(value = "querybidders",method = RequestMethod.POST)
     public String queryBidders(@RequestParam("TID") Integer TID) {
         return bidderService.queryBidders(TID);
     }
 
     // 竞标
-    @RequestMapping("bid")
+    @RequestMapping(value = "bid",method = RequestMethod.POST)
     public String bidIt(@RequestAttribute("UID") Integer UID, @ModelAttribute TaskBidder bidder) {
         return bidderService.bidIt(UID, bidder);
     }
 
     // 取消竞标
-    @RequestMapping("cancelbidding")
+    @RequestMapping(value = "cancelbidding",method = RequestMethod.POST)
     public String bidIt(@RequestAttribute("UID") Integer UID, @RequestParam("TID") Integer TID) {
         return bidderService.cancelBidding(UID, TID);
     }

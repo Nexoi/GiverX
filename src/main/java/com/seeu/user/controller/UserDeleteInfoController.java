@@ -16,16 +16,16 @@ public class UserDeleteInfoController {
     @Autowired
     DeleteInfoService deleteInfoService;
 
-    @RequestMapping("education")
+    @RequestMapping(value = "education",method = RequestMethod.POST)
     public String delEducation(@RequestParam("recordID") Integer recordID, @RequestAttribute("UID") Integer UID) {
         return deleteInfoService.delEducation(recordID, UID);
     }
 
-    @RequestMapping("business")
+    @RequestMapping(value = "business",method = RequestMethod.POST)
     public String delBusiness(@RequestParam("recordID") Integer recordID, @RequestAttribute("UID") Integer UID) {
         return deleteInfoService.delBusiness(recordID, UID);
     }
-    @RequestMapping("project")
+    @RequestMapping(value = "project",method = RequestMethod.POST)
     public String delProject(@RequestParam("recordID") Integer recordID, @RequestAttribute("UID") Integer UID) {
         return deleteInfoService.delBusiness(recordID, UID);
     }

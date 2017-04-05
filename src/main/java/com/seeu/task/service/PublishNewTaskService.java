@@ -3,8 +3,8 @@ package com.seeu.task.service;
 import com.TP;
 import com.TurnBackUtil;
 import com.alibaba.fastjson.JSONArray;
-import com.seeu.filesystem.service.FileUploadService;
-import com.seeu.filesystem.service.StorageProperties;
+import com.seeu.filesystem.service2.FileUploadService;
+import com.seeu.filesystem.service2.StorageProperties;
 import com.seeu.task.dao.TaskBasicMapper;
 import com.seeu.task.dao.TaskLocationMapper;
 import com.seeu.task.dao.TaskTimeMapper;
@@ -41,7 +41,7 @@ public class PublishNewTaskService {
     final Path taskpicturePath;
 
     public PublishNewTaskService(StorageProperties properties) {
-        this.taskpicturePath = Paths.get(properties.getTask());
+        this.taskpicturePath = Paths.get(properties.getLocation());//原来是getTask()
     }
 
     public String publishNewTask(Integer UID, TaskBasicWithBLOBs basic, TaskTime time, TaskLocation location) {

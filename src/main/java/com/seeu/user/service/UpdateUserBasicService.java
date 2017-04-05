@@ -3,8 +3,8 @@ package com.seeu.user.service;
 import com.TP;
 import com.TurnBackUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.seeu.filesystem.service.FileUploadService;
-import com.seeu.filesystem.service.StorageProperties;
+import com.seeu.filesystem.service2.FileUploadService;
+import com.seeu.filesystem.service2.StorageProperties;
 import com.seeu.user.dao.UserBasicMapper;
 import com.seeu.user.model.UserBasic;
 import org.apache.log4j.LogManager;
@@ -35,7 +35,7 @@ public class UpdateUserBasicService {
     private final Path userheadPath;
 
     public UpdateUserBasicService(StorageProperties properties) {
-        this.userheadPath = Paths.get(properties.getUserhead());
+        this.userheadPath = Paths.get(properties.getLocation());//原来是getUserhead()
     }
 
     public String updateMyIcon(MultipartFile icon, Integer UID) {

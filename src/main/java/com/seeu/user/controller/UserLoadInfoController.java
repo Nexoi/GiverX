@@ -27,7 +27,7 @@ public class UserLoadInfoController {
     UserFromToken userFromToken;
 
 
-    @RequestMapping(value = "mybasicinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "basicinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String loadBasicInfo(@RequestAttribute("UID") Integer UID) {
 //        LoginUser user = userFromToken.parseToken(token);
 //        if (user == null) {
@@ -37,7 +37,7 @@ public class UserLoadInfoController {
         return userInfoService.getmyBasic(UID);
     }
 
-    @RequestMapping(value = "mybusinessinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "businessinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String loadBusinessInfo(@RequestAttribute("UID") Integer UID) {
 //        LoginUser user = userFromToken.parseToken(token);
 //        if (user == null) {
@@ -47,7 +47,7 @@ public class UserLoadInfoController {
         return userInfoService.getmyBusiness(UID);
     }
 
-    @RequestMapping(value = "myeducationinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "educationinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String loadEducationInfo(@RequestAttribute("UID") Integer UID) {
 //        LoginUser user = userFromToken.parseToken(token);
 //        if (user == null) {
@@ -57,7 +57,7 @@ public class UserLoadInfoController {
         return userInfoService.getmyEducation(UID);
     }
 
-    @RequestMapping(value = "myinterestinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "interestinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String loadInterestInfo(@RequestAttribute("UID") Integer UID) {
 //        LoginUser user = userFromToken.parseToken(token);
 //        if (user == null) {
@@ -67,7 +67,7 @@ public class UserLoadInfoController {
         return userInfoService.getmyInterest(UID);
     }
 
-    @RequestMapping(value = "myprofileinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "profileinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String loadRealInfo(@RequestAttribute("UID") Integer UID) {
 //        LoginUser user = userFromToken.parseToken(token);
 //        if (user == null) {
@@ -77,7 +77,7 @@ public class UserLoadInfoController {
         return userInfoService.getmyRealProfile(UID);
     }
 
-    @RequestMapping(value = "mysocialinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "socialinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String loadSocialNetInfo(@RequestAttribute("UID") Integer UID) {
 //        LoginUser user = userFromToken.parseToken(token);
 //        if (user == null) {
@@ -86,7 +86,8 @@ public class UserLoadInfoController {
         // do next :
         return userInfoService.getmySocialNet(UID);
     }
-    @RequestMapping(value = "myprojectinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+
+    @RequestMapping(value = "projectinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String loadProjectInfo(@RequestAttribute("UID") Integer UID) {
         return userInfoService.getMyProject(UID);
     }

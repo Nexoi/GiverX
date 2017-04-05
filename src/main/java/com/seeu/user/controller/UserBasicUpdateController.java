@@ -30,7 +30,7 @@ public class UserBasicUpdateController {
      * @param icon
      * @return turn the query result back.
      */
-    @RequestMapping("myicon")
+    @RequestMapping(value = "myicon",method = RequestMethod.POST)
     public String update(@RequestParam(value = "icon", required = false) MultipartFile icon, @RequestAttribute("UID") Integer UID) {
 //        LoginUser user = userFromToken.parseToken(token);
 //        if (user == null)
@@ -39,7 +39,7 @@ public class UserBasicUpdateController {
         return updateUserBasicService.updateMyIcon(icon, UID);
     }
 
-    @RequestMapping("basic")
+    @RequestMapping(value = "basic",method = RequestMethod.POST)
     public String updateBasic(@RequestAttribute("UID") Integer UID, @ModelAttribute UserBasic basic) {
 //        LoginUser user = userFromToken.parseToken(token);
 //        if (user == null)

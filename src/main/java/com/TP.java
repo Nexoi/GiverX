@@ -41,6 +41,9 @@ public class TP {
     public static final int ORDER_FINISH_WITH_PURCHASE = 5002;       //订单关闭成功_支付成功
     public static final int ORDER_FINISH_WITHOUT_PURCHASE = 5003;    //订单关闭成功_无支付环节
     public static final int ORDER_UNFINISH = 5004;                   //订单关闭失败
+    public static final int ORDER_PURCHASE_SUCCESS = 5005;           //支付成功
+    public static final int ORDER_PURCHASE_FAILURE = 5006;           //支付失败
+    public static final int ORDER_PURCHASE_EXCEPTION = 5006;           //支付失败
 
 
     public static final String PATH_USER_PROJECT = "user//project";    //头像存储地址

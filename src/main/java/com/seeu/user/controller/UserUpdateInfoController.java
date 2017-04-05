@@ -27,7 +27,7 @@ public class UserUpdateInfoController {
     UpdateUserInfoService updateUserInfoService;
 
 
-    @RequestMapping("business")
+    @RequestMapping(value = "business",method = RequestMethod.POST)
     public String updateBusiness(@RequestAttribute("UID") Integer UID, @ModelAttribute UserBusiness userInfo) {
 //        LoginUser louser = userFromToken.parseToken(token);
 //        if (louser == null)
@@ -36,7 +36,7 @@ public class UserUpdateInfoController {
         return updateUserInfoService.updateMyBusiness(userInfo, UID);
     }
 
-    @RequestMapping("education")
+    @RequestMapping(value = "education",method = RequestMethod.POST)
     public String updateEducation(@RequestAttribute("UID") Integer UID, @ModelAttribute UserEducation userInfo) {
 //        LoginUser louser = userFromToken.parseToken(token);
 //        if (louser == null)
@@ -45,12 +45,12 @@ public class UserUpdateInfoController {
         return updateUserInfoService.updateMyEducation(userInfo, UID);
     }
 
-    @RequestMapping("project")
+    @RequestMapping(value = "project",method = RequestMethod.POST)
     public String updateEducation(@RequestAttribute("UID") Integer UID, @ModelAttribute UserProjectWithBLOBs userInfo) {
         return updateUserInfoService.updateMyProject(userInfo, UID);
     }
 
-    @RequestMapping("interest")
+    @RequestMapping(value = "interest",method = RequestMethod.POST)
     public String updateBasic(@RequestAttribute("UID") Integer UID, @ModelAttribute UserInterest userInfo) {
 //        LoginUser louser = userFromToken.parseToken(token);
 //        if (louser == null)
@@ -59,7 +59,7 @@ public class UserUpdateInfoController {
         return updateUserInfoService.updateMyInterest(userInfo, UID);
     }
 
-    @RequestMapping("profile")
+    @RequestMapping(value = "profile",method = RequestMethod.POST)
     public String updateBasic(@RequestAttribute("UID") Integer UID, @ModelAttribute UserRealProfile userInfo) {
 //        LoginUser louser = userFromToken.parseToken(token);
 //        if (louser == null)
@@ -68,7 +68,7 @@ public class UserUpdateInfoController {
         return updateUserInfoService.updateMyRealProfile(userInfo, UID);
     }
 
-    @RequestMapping("social")
+    @RequestMapping(value = "social",method = RequestMethod.POST)
     public String updateSocialNet(@RequestAttribute("UID") Integer UID, @ModelAttribute UserSocialNet userInfo) {
 //        LoginUser louser = userFromToken.parseToken(token);
 //        if (louser == null)

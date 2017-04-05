@@ -3,8 +3,8 @@ package com.seeu.user.service;
 import com.TP;
 import com.TurnBackUtil;
 import com.alibaba.fastjson.JSONArray;
-import com.seeu.filesystem.service.FileUploadService;
-import com.seeu.filesystem.service.StorageProperties;
+import com.seeu.filesystem.service2.FileUploadService;
+import com.seeu.filesystem.service2.StorageProperties;
 import com.seeu.user.dao.UserBusinessMapper;
 import com.seeu.user.dao.UserEducationMapper;
 import com.seeu.user.dao.UserProjectMapper;
@@ -38,7 +38,7 @@ public class AddRecordInfoService {
     private final Path userprojectPath;
 
     public AddRecordInfoService(StorageProperties properties) {
-        this.userprojectPath = Paths.get(properties.getUserproject());
+        this.userprojectPath = Paths.get(properties.getLocation());//原来是getUserproject()
     }
 
     public String addBusiness(UserBusiness userBusiness) {

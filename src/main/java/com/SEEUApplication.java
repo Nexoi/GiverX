@@ -1,6 +1,6 @@
 package com;
 
-import com.seeu.filesystem.service.StorageProperties;
+import com.seeu.filesystem.service2.StorageProperties;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -30,7 +30,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
         "com.seeu.user",
         "com.seeu.userpay",
         "com.seeu.task",
-        "com.seeu.im"
+        "com.seeu.im",
+        "com.seeu.order"
         })
 @ServletComponentScan
 @PropertySources(value = {@PropertySource("classpath:application.properties")})

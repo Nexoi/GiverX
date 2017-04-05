@@ -1,10 +1,9 @@
-package com.seeu.filesystem.controller;
+package com.seeu.filesystem.controller2;
 
+import com.alibaba.fastjson.JSONObject;
 import com.TP;
 import com.TurnBackUtil;
-import com.alibaba.fastjson.JSONObject;
-import com.seeu.filesystem.service.FileUploadService;
-import com.seeu.userOAuth.db.model.LoginUser;
+import com.seeu.filesystem.service2.FileUploadService;
 import com.seeu.userOAuth.service.UserFromToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ import java.nio.file.Paths;
  * Created by neo on 16/01/2017.
  */
 @RestController
-@RequestMapping("fsysup")
+@RequestMapping("file")
 public class FileUploadController {
 
     @Autowired
@@ -36,7 +35,7 @@ public class FileUploadController {
             return turnBackUtil.formIt(TP.RESCODE_FAILURE, "上传失败，文件为空", null);
         }
         // handle path
-        Path path = Paths.get(UID.toString());// this path is illegal.
+        Path path = Paths.get(UID + "".toString());// this path is illegal.
 
         // handle type (.png)
         if (type == null)
@@ -51,7 +50,7 @@ public class FileUploadController {
         } else {
             JSONObject jo = new JSONObject();
             jo.put("filename", filename);
-            jo.put("filepath", path);
+//            jo.put("filepath", path);
             return turnBackUtil.formIt(TP.RESCODE_SUCCESS, "上传成功", jo);
         }
     }
